@@ -1,10 +1,14 @@
 package com.back.jtmi.entity;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+
 public class MiddleCategory {
     @Id
     private Long middleId;
