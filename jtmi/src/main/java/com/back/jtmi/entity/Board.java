@@ -20,7 +20,7 @@ public class Board {
     private String boardPrevContent;
     private String boardContent;
 
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "tagId",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Tag> tag = new ArrayList<>();
 
 }

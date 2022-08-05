@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Tag {
     @Id
+    @GeneratedValue
     private Long tagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -18,20 +19,7 @@ public class Tag {
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "middleId")
-    private MiddleCategory middleId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "smallId")
     private SmallCategory smallId;
-
-//
-//    @OneToMany(mappedBy = "middleId", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<MiddleCategory> middleCategory = new ArrayList<>();
-//
-//
-//    @OneToMany(mappedBy = "smallId", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<SmallCategory> smallCategory = new ArrayList<>();
-
 
 }

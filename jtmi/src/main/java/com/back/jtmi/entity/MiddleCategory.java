@@ -11,15 +11,21 @@ import java.util.List;
 
 public class MiddleCategory {
     @Id
+    @GeneratedValue
     private Long middleId;
+
     private String middleName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="bigId")
     private BigCategory bigCategory;
 
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    List<SmallCategory> smallCategory= new ArrayList<>();
 
-    @OneToMany(mappedBy = "tagId",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Tag> tag = new ArrayList<>();
+    public MiddleCategory(String middleName,BigCategory bigCategory){
+        this.middleName=middleName;
+        this.bigCategory=bigCategory;
+    }
 
 }

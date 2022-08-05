@@ -7,5 +7,4 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommonResult {
-//    private int code;
 }
