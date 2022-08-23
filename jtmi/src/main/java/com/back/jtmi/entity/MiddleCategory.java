@@ -1,5 +1,6 @@
 package com.back.jtmi.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,10 +9,10 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-
+@Getter
 public class MiddleCategory {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long middleId;
 
     private String middleName;
@@ -20,7 +21,7 @@ public class MiddleCategory {
     @JoinColumn(name ="bigId")
     private BigCategory bigCategory;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "smallId",cascade = CascadeType.ALL,orphanRemoval = true)
     List<SmallCategory> smallCategory= new ArrayList<>();
 
     public MiddleCategory(String middleName,BigCategory bigCategory){

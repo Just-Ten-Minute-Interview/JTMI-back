@@ -1,5 +1,6 @@
 package com.back.jtmi.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,10 +9,10 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-
+@Getter
 public class SmallCategory {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long smallId;
 
     @ManyToOne(fetch = FetchType.LAZY)

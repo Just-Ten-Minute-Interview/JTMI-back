@@ -22,7 +22,7 @@ public class BigCategory {
     public BigCategory(String name){
         this.bigName = name;
     }
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "middleId",cascade = CascadeType.ALL,orphanRemoval = true)
     List<MiddleCategory> middleCategory= new ArrayList<>();
 
 

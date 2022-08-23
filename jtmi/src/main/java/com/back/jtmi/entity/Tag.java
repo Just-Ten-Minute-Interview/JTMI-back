@@ -1,17 +1,16 @@
 package com.back.jtmi.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
-
+@Getter
 public class Tag {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tagId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,6 +19,11 @@ public class Tag {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "smallId")
-    private SmallCategory smallId;
+    private SmallCategory smallCategory;
+
+    public Tag(Board board, SmallCategory smallCategory){
+        this.board=board;
+        this.smallCategory=smallCategory;
+    }
 
 }
