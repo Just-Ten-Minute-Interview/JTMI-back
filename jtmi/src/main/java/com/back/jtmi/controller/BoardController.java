@@ -3,6 +3,7 @@ package com.back.jtmi.controller;
 import com.back.jtmi.dto.BoardDetailDTO;
 import com.back.jtmi.dto.BoardWriteDTO;
 import com.back.jtmi.dto.NormalResponseDTO;
+import com.back.jtmi.entity.Board;
 import com.back.jtmi.entity.SmallCategory;
 import com.back.jtmi.response.error.CustomException;
 import com.back.jtmi.response.error.ErrorCode;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -22,17 +24,17 @@ public class BoardController {
     private final CategoryService categoryService;
     private final BoardService boardService;
 
-    @GetMapping(value = "/board/")
-    public ResponseEntity<?> findByid() {
-        NormalResponseDTO normal = new NormalResponseDTO();
-        Random rand = new Random();
-        int i = rand.nextInt(10);
-        if (i < 5) {
-            throw new CustomException(ErrorCode.NOT_CORRECT);
-        }
-
-        return new ResponseEntity<NormalResponseDTO>(normal, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/board/")
+//    public ResponseEntity<?> findByid() {
+//        NormalResponseDTO normal = new NormalResponseDTO();
+//        Random rand = new Random();
+//        int i = rand.nextInt(10);
+//        if (i < 5) {
+//            throw new CustomException(ErrorCode.NOT_CORRECT);
+//        }
+//
+//        return new ResponseEntity<NormalResponseDTO>(normal, HttpStatus.OK);
+//    }
     @GetMapping(value = "/board")
     public ResponseEntity<?> findCategory(@PathVariable(required = false ,value="big")String big,
                                       @PathVariable(required = false ,value="middle")String middle,
@@ -52,6 +54,18 @@ public class BoardController {
         SmallCategory smallCategory = categoryService.validateSmallCategory(boardWriteDTO.getSmallId());
         boardService.writeBoard(boardWriteDTO,smallCategory);
         return new ResponseEntity<String>("hi", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/board/big/{id}")
+    public ResponseEntity<?> bigId(@PathVariable("id") Long id) {
+        List<BoardDetailDTO> result =  boardService.findByBigCategory(id);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    @GetMapping(value = "/board/middle/{id}")
+    public ResponseEntity<?> middleId(@PathVariable("id") Long id) {
+        List<BoardDetailDTO> result =  boardService.findByMiddleCategory(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
